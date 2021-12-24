@@ -1,1 +1,11 @@
-<div class="p-5 bg-sky-400 text-red-300">Welcome to issue tracker</div>
+<div class="flex min-h-screen">
+  <div>
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="w-full">
+    <app-header></app-header>
+    <main class="p-8">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
