@@ -1,11 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { AuthenticationFacade } from '../../auth.facade';
 
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-  constructor() {}
+  loginForm!: FormGroup;
 
-  ngOnInit(): void {}
+  constructor(
+    private fb: FormBuilder,
+    private authFacade: AuthenticationFacade
+  ) {}
+
+  public ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      email: [''],
+      password: [''],
+    });
+  }
+
+  public onLogin(): void {
+    console.log(this.loginForm);
+
+    if (this.loginForm.valid) {
+      this.authFacade.login(this.loginForm);
+    }
+  }
 }

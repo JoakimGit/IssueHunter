@@ -1,16 +1,36 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { AuthenticationFacade } from '../../auth.facade';
+import { TokenPayload } from '../../models/token';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'signup',
   templateUrl: './signup.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class SignupComponent implements OnInit {
+  signupForm!: FormGroup;
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+    private authFacade: AuthenticationFacade
+  ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.signupForm = this.fb.group({
+      name: [''],
+      email: [''],
+      password: [''],
+      confirmPassword: [''],
+    });
   }
 
+  public onRegister(): void {
+    console.log(this.signupForm);
+
+    if (this.signupForm.valid) {
+      this.authFacade.register(this.signupForm);
+    }
+  }
 }

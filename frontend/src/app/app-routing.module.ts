@@ -1,26 +1,45 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
-import { ProjectModule } from './project/project.module';
-import { TicketModule } from './ticket/ticket.module';
+import { LoginComponent } from './auth/components/login/login.component';
+import { SignupComponent } from './auth/components/signup/signup.component';
+import { AuthGuard } from './auth/guards/auth.guard';
+import { LayoutComponent } from './common/components/layout/layout.component';
 
 const routes: Routes = [
-  {
-    path:'auth',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  /* {
+    path: 'login',
+    component: LoginComponent,
   },
   {
-    path:'ticket',
-    loadChildren: () => import('./ticket/ticket.module').then(m => m.TicketModule)
+    path: 'signup',
+    component: SignupComponent,
+  }, */
+  {
+    path: 'auth',
+    loadChildren: () => AuthModule,
   },
   {
-    path:'project',
-    loadChildren: () => import('./project/project.module').then(m => m.ProjectModule)
-  }
+    path: '',
+    component: LayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'tickets',
+        loadChildren: () =>
+          import('./ticket/ticket.module').then((m) => m.TicketModule),
+      },
+      {
+        path: 'projects',
+        loadChildren: () =>
+          import('./project/project.module').then((m) => m.ProjectModule),
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
