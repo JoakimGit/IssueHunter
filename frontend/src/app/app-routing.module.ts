@@ -1,20 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
-import { LoginComponent } from './auth/components/login/login.component';
-import { SignupComponent } from './auth/components/signup/signup.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { LayoutComponent } from './common/components/layout/layout.component';
 
 const routes: Routes = [
-  /* {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'signup',
-    component: SignupComponent,
-  }, */
   {
     path: 'auth',
     loadChildren: () => AuthModule,
@@ -22,7 +12,7 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
       {
         path: 'tickets',

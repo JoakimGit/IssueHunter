@@ -1,9 +1,26 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Ticket } from '../models/ticket';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketService {
+  private apiUri = environment.apiUri;
+  
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
+  public getTickets(): Observable<Ticket> {
+    return this.http.get<Ticket>(this.apiUri + '/tickets');
+  }
+
+  public createTicket(ticket: Ticket): Observable<Ticket> {
+    return this.http.post<Ticket>(this.apiUri + '/tickets', ticket);
+  }
+
+  public updateTicket(ticket: Ticket): Observable<Ticket> {
+    return this.http.post<Ticket>(this.apiUri + '/tickets/'+ ticket._id, ticket);
+  }
 }
