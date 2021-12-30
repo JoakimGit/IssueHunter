@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Role } from '../common/enums/role';
+import { Role } from '../shared/enums/role';
 import { AuthService } from './api/auth.service';
 import { TokenPayload } from './models/token';
 import { User } from './models/user';
@@ -32,7 +32,7 @@ export class AuthenticationFacade {
 
   public logout(): void {
     this.token = '';
-    window.localStorage.removeItem('token');
+    localStorage.removeItem('token');
     this.router.navigateByUrl('login');
   }
 

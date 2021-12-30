@@ -5,15 +5,19 @@ import { environment } from 'src/environments/environment';
 import { Project } from '../models/project';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectService {
   private apiUri = environment.apiUri;
-  
-  constructor(private http: HttpClient) { }
 
-  public getProjects(): Observable<Project>  {
-    return this.http.get<Project>(this.apiUri + '/projects');
+  constructor(private http: HttpClient) {}
+
+  public getProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>(this.apiUri + '/projects');
+  }
+
+  public getProjectById(id: string): Observable<Project> {
+    return this.http.get<Project>(this.apiUri + '/projects/' + id);
   }
 
   public createProject(project: Project): Observable<Project> {
@@ -21,6 +25,9 @@ export class ProjectService {
   }
 
   public updateProject(project: Project): Observable<Project> {
-    return this.http.post<Project>(this.apiUri + '/projects/'+ project._id, project);
+    return this.http.post<Project>(
+      this.apiUri + '/projects/' + project._id,
+      project
+    );
   }
 }

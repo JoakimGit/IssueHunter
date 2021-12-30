@@ -1,13 +1,10 @@
-const passport = require("passport");
+import passport from "passport";
 const LocalStrategy = require("passport-local").Strategy;
-const mongoose = require("mongoose");
 const User = require("../models/user");
 
 passport.use(
   new LocalStrategy(
-    {
-      usernameField: "email",
-    },
+    { usernameField: "email" },
     async (username: string, password: string, done: Function) => {
       try {
         const user = await User.findOne({ email: username });
@@ -26,5 +23,3 @@ passport.use(
     }
   )
 );
-
-export {};

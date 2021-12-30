@@ -1,15 +1,17 @@
 import express, { Request, Response } from "express";
+import jwt from "express-jwt";
 const router = express.Router();
-const jwt = require("express-jwt");
 
-const authenticationController = require("../controllers/authentication");
-const projectController = require("../controllers/project");
-const ticketController = require("../controllers/ticket");
+// IMPORT CONTROLLERS
+
+import * as authenticationController from "../controllers/authentication";
+import * as projectController from "../controllers/project";
+import * as ticketController from "../controllers/ticket";
 
 const auth = jwt({
-  secret: process.env.JWT_Secret,
+  secret: process.env.JWT_Secret as string,
   userProperty: "payload",
-  algorithms: ["RS256"],
+  algorithms: ["sha1", "RS256", "HS256"]
 });
 
 // AUTHENTICATION ROUTES
@@ -21,15 +23,13 @@ router.get("/projects", projectController.getProjects);
 router.post("/projects", projectController.createProject);
 router.put("/projects/:id", projectController.updateProject);
 
-
 // TICKET ROUTES
 router.get("/tickets", ticketController.getTickets);
 router.post("/tickets", ticketController.createTicket);
 router.put("/tickets/:id", ticketController.updateTicket);
 
-
 router.get("/public-route", auth, (req: Request, res: Response) => {
   res.json({ data: "Hi from public route" });
 });
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -20,17 +20,10 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = this.authFacade.getToken();
 
     const authReq = request.clone({
-      setHeaders: { Authorization: `Bearer ${token}` },
-    });
-    /* const authReq = request.clone({
       headers: request.headers
         .set('Content-Type', 'application/json')
         .set('Authorization', `Bearer ${token}`),
-    }); */
-    console.log('TOKEN: ' + token);
-
-    console.log('REQUEST' + JSON.stringify(authReq));
-
+    });
     return next.handle(authReq);
   }
 }

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-const User = require("../models/user");
-const passport = require("passport");
+import passport from "passport";
+import User from "../models/user";
 
 const register = async (req: Request, res: Response) => {
   const { email, name, role, company, password } = req.body;
@@ -38,4 +38,4 @@ const login = async (req: Request, res: Response) => {
   })(req, res);
 };
 
-module.exports = { register, login };
+export { register, login };

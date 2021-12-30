@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-const Ticket = require("../models/ticket");
+import Ticket from "../models/ticket";
 
 const getTickets = async (req: Request, res: Response) => {
-  
   try {
     const tickets = await Ticket.find();
     res.status(200).json({ data: tickets });
@@ -12,7 +11,8 @@ const getTickets = async (req: Request, res: Response) => {
 };
 
 const createTicket = async (req: Request, res: Response) => {
-  const { name, description, status, priority, createdBy, assignedTo } = req.body;
+  const { name, description, status, priority, createdBy, assignedTo } =
+    req.body;
   const ticket = new Ticket();
 
   ticket.name = name;
@@ -31,7 +31,8 @@ const createTicket = async (req: Request, res: Response) => {
 };
 
 const updateTicket = async (req: Request, res: Response) => {
-  const { name, description, status, priority, createdBy, assignedTo } = req.body;
+  const { name, description, status, priority, createdBy, assignedTo } =
+    req.body;
   const ticket = new Ticket();
 
   ticket.name = name;
@@ -43,10 +44,10 @@ const updateTicket = async (req: Request, res: Response) => {
 
   try {
     const newTicket = await ticket.save();
-    res.status(201).json({data: newTicket});
+    res.status(201).json({ data: newTicket });
   } catch (error) {
     console.error(error);
   }
 };
 
-module.exports = { getTickets, createTicket, updateTicket };
+export { getTickets, createTicket, updateTicket };

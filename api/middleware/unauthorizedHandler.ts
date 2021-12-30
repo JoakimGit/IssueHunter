@@ -11,4 +11,4 @@ const unauthorizedHandler = (
   }
 };
 
-module.exports = { unauthorizedHandler };
+export { unauthorizedHandler };

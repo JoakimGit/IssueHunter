@@ -1,11 +1,11 @@
 require("dotenv").config();
 import express, { NextFunction, Request, Response } from "express";
 const app = express();
-const passport = require("passport");
-const routesApi = require("./api/routes");
-const connectDB = require("./api/config/database.config");
-const cors = require("cors");
-const { unauthorizedHandler } = require("./api/middleware/unauthorizedHandler");
+import passport from "passport";
+import routesApi from "./api/routes";
+import connectDB from "./api/config/database.config";
+import cors from "cors";
+import { unauthorizedHandler } from "./api/middleware/unauthorizedHandler";
 require("./api/models/user");
 require("./api/config/passport");
 
@@ -16,13 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(passport.initialize());
 app.use("/api", routesApi);
-// app.use(unauthorizedHandler);
-
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  if (err.name === "UnauthorizedError") {
-    res.status(401).json({ message: err.name + ": " + err.message });
-  }
-});
+app.use(unauthorizedHandler);
 
 const PORT = process.env.PORT || 8080;
 

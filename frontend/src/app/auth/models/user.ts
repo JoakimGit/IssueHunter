@@ -1,4 +1,4 @@
-import { Role } from 'src/app/common/enums/role';
+import { Role } from 'src/app/shared/enums/role';
 
 export interface User {
   _id: string;
@@ -7,5 +7,4 @@ export interface User {
   role: Role;
   company: string;
   exp: number;
-  iat: number;
 }

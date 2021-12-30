@@ -1,26 +1,27 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const ticketSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: true
   },
   description: {
-    type: String,
+    type: String
   },
   status: {
-    type: String,
+    type: String
   },
   priority: {
-    type: String,
+    type: String
   },
   assignedTo: {
-    type: String,
+    type: String
   },
   createdBy: {
-    type: String,
-  },
+    type: String
+  }
 });
 
-module.exports = mongoose.model("Ticket", ticketSchema);
-export {}
+const Ticket = mongoose.model("Ticket", ticketSchema);
+
+export default Ticket;

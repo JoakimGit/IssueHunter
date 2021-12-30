@@ -14,11 +14,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  public register(user: TokenPayload): Observable<any> {
+  public register(user: TokenPayload): Observable<TokenResponse> {
     return this.http.post<TokenResponse>(this.apiUri + '/register', user);
   }
 
-  public login(user: TokenPayload): Observable<any> {
+  public login(user: TokenPayload): Observable<TokenResponse> {
     return this.http.post<TokenResponse>(this.apiUri + '/login', user);
   }
 

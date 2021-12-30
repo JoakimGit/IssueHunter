@@ -1,25 +1,25 @@
-const mongoose = require("mongoose");
-const crypto = require("crypto");
-const jwt = require("jsonwebtoken");
+import mongoose from "mongoose";
+import crypto from "crypto";
+import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
-    required: true,
+    required: true
   },
   name: {
     type: String,
-    required: true,
+    required: true
   },
   role: {
-    type: String,
+    type: String
   },
   company: {
-    type: String,
+    type: String
   },
   hash: String,
-  salt: String,
+  salt: String
 });
 
 userSchema.methods.setPassword = function (password: string) {
@@ -47,11 +47,12 @@ userSchema.methods.generateJwt = function () {
       name: this.name,
       role: this.role,
       company: this.company,
-      exp: expiry.getTime() / 1000,
+      exp: expiry.getTime() / 1000
     },
-    process.env.JWT_SECRET
+    process.env.JWT_SECRET as string
   );
 };
 
-module.exports = mongoose.model("User", userSchema);
-export {};
+const User = mongoose.model("User", userSchema);
+
+export default User;

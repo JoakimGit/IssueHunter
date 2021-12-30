@@ -1,4 +1,4 @@
-import { Role } from 'src/app/common/enums/role';
+import { Role } from 'src/app/shared/enums/role';
 
 export interface TokenResponse {
   token: string;
