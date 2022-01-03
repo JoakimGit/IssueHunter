@@ -5,18 +5,20 @@ import {
   TicketType,
 } from 'src/app/shared/enums/ticket';
 
-export interface Ticket {
+export class Ticket {
   _id: string;
   name: string;
   description: string;
-  status: TicketStatus;
-  priority: TicketPriority;
-  type: TicketType;
+  status = TicketStatus.OPEN;
+  priority = TicketPriority.LOW;
+  type = TicketType.BUG;
   assignedTo: User;
   submitter: User;
-  createdOn: Date;
-  updatedOn: Date;
+  createdAt: Date;
+  updatedAt: Date;
   dueDate: Date;
   comments: string[];
-  project: string;
+  projectId: string;
+
+  constructor() {}
 }

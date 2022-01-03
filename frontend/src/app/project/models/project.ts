@@ -8,4 +8,6 @@ export class Project {
   company: string;
   members: User[];
   tickets: Ticket[];
+  createdAt: Date;
+  updatedAt: Date;
 }

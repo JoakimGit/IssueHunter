@@ -1,6 +1,7 @@
 <header class="flex p-4 items-center justify-end bg-sky text-white gap-3 border-b border-blue-500">
-  <button (click)="secretRoute()">Secret</button>
-  <button (click)="logout()">Logout</button>
+  <button class="block py-2.5 px-4 rounded transition duration-200 hover:bg-cyan-400" (click)="logout()">Logout</button>
+  
+  <a routerLink="terms" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-cyan-400">Terms</a>    
 
   <div class="flex items-center">
     <label class="pr-1.5" for="search">

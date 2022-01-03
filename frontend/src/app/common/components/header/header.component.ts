@@ -14,8 +14,4 @@ export class HeaderComponent implements OnInit {
   public logout(): void {
     this.authFacade.logout();
   }
-
-  public secretRoute(): void {
-    this.authFacade.secretRoute();
-  }
 }

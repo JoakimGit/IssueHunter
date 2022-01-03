@@ -8,6 +8,9 @@ import { HeaderComponent } from './common/components/header/header.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutComponent } from './common/components/layout/layout.component';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoadingInterceptor } from './common/interceptors/loading.interceptor';
+import { LoaderComponent } from './common/components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -15,10 +18,17 @@ import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
     SidebarComponent,
     HeaderComponent,
     LayoutComponent,
+    LoaderComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

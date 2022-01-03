@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Project } from '../../models/project';
 import { ProjectFacade } from '../../project.facade';
 

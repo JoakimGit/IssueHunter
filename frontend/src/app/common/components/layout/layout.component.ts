@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'layout',
   templateUrl: './layout.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class LayoutComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

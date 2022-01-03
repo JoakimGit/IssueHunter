@@ -5,15 +5,21 @@ import { environment } from 'src/environments/environment';
 import { Ticket } from '../models/ticket';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TicketService {
   private apiUri = environment.apiUri;
-  
-  constructor(private http: HttpClient) { }
 
-  public getTickets(): Observable<Ticket> {
-    return this.http.get<Ticket>(this.apiUri + '/tickets');
+  constructor(private http: HttpClient) {}
+
+  public getTicketsByProjectId(projectId: string): Observable<Ticket> {
+    return this.http.get<Ticket>(
+      this.apiUri + `/projects/${projectId}/tickets`
+    );
+  }
+
+  public getTicketById(ticketId: string): Observable<Ticket> {
+    return this.http.get<Ticket>(this.apiUri + `/tickets/${ticketId}`);
   }
 
   public createTicket(ticket: Ticket): Observable<Ticket> {
@@ -21,6 +27,9 @@ export class TicketService {
   }
 
   public updateTicket(ticket: Ticket): Observable<Ticket> {
-    return this.http.post<Ticket>(this.apiUri + '/tickets/'+ ticket._id, ticket);
+    return this.http.put<Ticket>(
+      this.apiUri + '/tickets/' + ticket._id,
+      ticket
+    );
   }
 }

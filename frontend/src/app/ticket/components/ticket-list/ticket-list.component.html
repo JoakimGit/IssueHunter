@@ -3,10 +3,10 @@
   <div class="flex items-center justify-between pb-6">
     <!-- Title -->
     <div>
-      <h1 class="text-2xl text-gray-600 font-semibold">Tickets</h1>
+      <h1 class="text-2xl text-gray-600 font-medium">Tickets</h1>
     </div>
     <!-- Search and buttons -->
-    <div class="flex items-center justify-between">
+    <div class="flex items-center">
       <div class="relative mx-auto">
         <input class="border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg focus:outline-none placeholder:text-gray-400"
           type="search" name="search" placeholder="search...">
@@ -17,8 +17,11 @@
             d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
         </svg>
       </div>
-      <div class="lg:ml-40 ml-10">
-        <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">New task</button>
+      <div class="lg:ml-16 ml-8">
+        <a [routerLink]="['../invite']" class="bg-blue-600 px-4 py-2 rounded-md text-white font-medium tracking-wide cursor-pointer">Add member</a>
+      </div>
+      <div class="lg:ml-16 ml-8">
+        <a routerLink="new" class="bg-indigo-600 px-4 py-2 rounded-md text-white font-medium tracking-wide cursor-pointer">New ticket</a>
       </div>
     </div>
   </div>
@@ -29,61 +32,54 @@
         <!-- Table Header -->
         <thead>
           <tr>
-            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
+            <th class="px-5 py-3 bg-cyan-200 text-center text-xs font-medium text-gray-600 tracking-wider uppercase ">
               Status
             </th>
-            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+            <th class="px-5 py-3 bg-cyan-200 text-left text-xs font-medium text-gray-600 tracking-wider uppercase">
               Ticket 
             </th>
-            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
+            <th class="px-5 py-3 bg-cyan-200 text-center text-xs font-medium text-gray-600 tracking-wider uppercase">
               Priority
             </th>
-            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+            <th class="px-5 py-3 bg-cyan-200 text-left text-xs font-medium text-gray-600 tracking-wider uppercase whitespace-nowrap">
               Assigned To
             </th>
-            <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+            <th class="px-5 py-3 bg-cyan-200 text-left text-xs font-medium text-gray-600 tracking-wider uppercase">
               Created
             </th>
           </tr>
         </thead>
         <!-- Table Body -->
         <tbody>
-          <tr>
-            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-              <span class="bg-green-200 px-3 py-1.5 text-sm shadow-sm tracking-wider text-green-700 font-semibold rounded-full whitespace-nowrap">Open</span>
+          <tr *ngFor="let ticket of tickets$ | async">
+            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
+              <span *ngIf="ticket.status ==='Open'" class="bg-blue-200 px-3 py-1.5 text-sm shadow-sm tracking-wider text-blue-700 font-medium rounded-full whitespace-nowrap">Open</span>
+              <span *ngIf="ticket.status ==='In Progress'" class="bg-green-300 px-3 py-1.5 text-sm shadow-sm tracking-wider text-green-700 font-medium rounded-full whitespace-nowrap">In Progress</span>
+              <span *ngIf="ticket.status ==='Ready For Review'" class="bg-yellow-300 px-3 py-1.5 text-sm shadow-sm tracking-wider text-yellow-700 font-medium rounded-full whitespace-nowrap">Ready for Review</span>
+              <span *ngIf="ticket.status ==='Completed'" class="bg-slate-300 px-3 py-1.5 text-sm shadow-sm tracking-wider text-slate-700 font-medium rounded-full whitespace-nowrap">Completed</span>
             </td>
             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-              <p class="text-gray-900 text-base">Create Nav Group for Teams section</p>
-              <p class="text-gray-500">We need a new hero image for the Customer Support section on the marketing site.
-                We should illustrate how DoneDone uniquely merges customer support and help desk with task tracking and project management.</p>
+              <a [routerLink]="['.', ticket._id]">              
+                <p class="text-gray-900 text-base">{{ ticket.name }}</p>
+                <p class="text-gray-500 line-clamp-1">{{ ticket.description }}</p>
+              </a>
+            </td>
+            
+            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
+              <span *ngIf="ticket.priority ==='Low'" class="bg-green-600 px-8 py-0.5 text-sm shadow-sm tracking-wider text-white font-medium rounded-full">Low</span>
+              <span *ngIf="ticket.priority ==='Medium'" class="bg-orange-600 px-8 py-0.5 text-sm shadow-sm tracking-wider text-white font-medium rounded-full">Medium</span>
+              <span *ngIf="ticket.priority ==='High'" class="bg-red-600 px-8 py-0.5 text-sm shadow-sm tracking-wider text-white font-medium rounded-full">High</span>
+              <span *ngIf="ticket.priority ==='Critical'" class="bg-black px-8 py-0.5 text-sm shadow-sm tracking-wider text-white font-medium rounded-full">Critical</span>
             </td>
             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-              <!-- <p class="text-gray-900 whitespace-nowrap">Medium</p> -->
-              <span class="bg-green-600 px-8 py-0.5 text-sm shadow-sm tracking-wider text-white font-semibold rounded-full">Medium</span>
+              <p class="text-gray-900 whitespace-nowrap">{{ ticket.assignedTo }}</p>
             </td>
             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-              <p class="text-gray-900 whitespace-nowrap">Vera Carpenter</p>
-            </td>
-            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-              <p class="text-gray-900 whitespace-nowrap">Jan 21</p>
+              <p class="text-gray-900 whitespace-nowrap">{{ ticket.createdAt | date: "MMM dd, '''yy" }}</p>
             </td>
           </tr>            
         </tbody>
-      </table>
-      <!--  <div class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
-        <span class="text-xs xs:text-sm text-gray-900">
-          Showing 1 to 4 of 50 Entries
-        </span>
-        <div class="inline-flex mt-2 xs:mt-0">
-          <button class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l">
-            Prev
-          </button>
-          
-          <button class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r">
-            Next
-          </button>
-        </div>
-      </div> -->
+      </table>      
     </div>
   </div>
   

@@ -22,8 +22,6 @@ export class LoginComponent implements OnInit {
   }
 
   public onLogin(): void {
-    console.log(this.loginForm);
-
     if (this.loginForm.valid) {
       this.authFacade.login(this.loginForm);
     }

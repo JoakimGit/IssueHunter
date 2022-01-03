@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationFacade } from 'src/app/auth/auth.facade';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class SidebarComponent implements OnInit {
+  constructor(public authFacade: AuthenticationFacade) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

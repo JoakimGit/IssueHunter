@@ -15,14 +15,14 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     children: [
       {
-        path: 'tickets',
-        loadChildren: () =>
-          import('./ticket/ticket.module').then((m) => m.TicketModule),
-      },
-      {
         path: 'projects',
         loadChildren: () =>
           import('./project/project.module').then((m) => m.ProjectModule),
+      },
+      {
+        path: 'projects/:id',
+        loadChildren: () =>
+          import('./ticket/ticket.module').then((m) => m.TicketModule),
       },
     ],
   },

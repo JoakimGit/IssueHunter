@@ -5,11 +5,11 @@ export interface TokenResponse {
 }
 
 export class TokenPayload {
-  email!: string;
-  password!: string;
-  name?: string;
-  role?: Role;
-  company?: string;
+  email: string;
+  password: string;
+  name: string;
+  role: Role;
+  company: string;
 
   constructor(
     email: string,

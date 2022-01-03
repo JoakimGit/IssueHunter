@@ -33,7 +33,7 @@ export class AuthenticationFacade {
   public logout(): void {
     this.token = '';
     localStorage.removeItem('token');
-    this.router.navigateByUrl('login');
+    this.router.navigateByUrl('auth/login');
   }
 
   public getUserDetails(): User | null {
@@ -58,10 +58,8 @@ export class AuthenticationFacade {
 
   public login(loginForm: FormGroup): void {
     let user: TokenPayload = { ...loginForm.value };
-    console.log(user);
 
     this.authService.login(user).subscribe((resp) => {
-      console.log(resp);
       if (resp.token) {
         this.saveToken(resp.token);
         this.router.navigate(['projects'], { relativeTo: this.route });
@@ -74,20 +72,12 @@ export class AuthenticationFacade {
     signupForm.value.company
       ? (user.role = Role.ADMIN)
       : (user.role = Role.USER);
-    console.log(user);
 
     this.authService.register(user).subscribe((resp) => {
-      console.log(resp);
       if (resp.token) {
         this.saveToken(resp.token);
         this.router.navigate(['projects'], { relativeTo: this.route });
       }
-    });
-  }
-
-  public secretRoute(): void {
-    this.authService.secretRoute().subscribe((resp) => {
-      console.log(resp);
     });
   }
 }

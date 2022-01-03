@@ -1,17 +1,23 @@
 import { Request, Response } from "express";
 import passport from "passport";
 import User from "../models/user";
+import Company from "../models/company";
 
 const register = async (req: Request, res: Response) => {
-  const { email, name, role, company, password } = req.body;
-  const user = new User();
-
-  user.name = name;
-  user.email = email;
-  user.role = role;
-  user.company = company;
+  const { email, name, role, company, password, isNewCompany } = req.body;
+  const user = new User({ email, name, role, company });
 
   user.setPassword(password);
+
+  if (isNewCompany) {
+    const newCompany = new Company({ name: company });
+    newCompany.members.push(user);
+    try {
+      const savedCompany = await newCompany.save();
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   try {
     const newUser = await user.save();

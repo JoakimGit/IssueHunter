@@ -24,15 +24,18 @@ export class AddeditprojectComponent implements OnInit {
     const id: string = this.route.snapshot.params['id'];
     this.isAddMode = !id;
 
-    console.log('Selected Project is:');
-    console.log(this.selectedProject);
-
     if (this.isAddMode) {
       this.selectedProject = new Project();
+      this.setFormGroup();
     } else {
-      this.projectFacade.getProjectById(id);
+      this.projectFacade.getProjectById(id).subscribe((resp) => {
+        this.selectedProject = resp;
+        this.setFormGroup();
+      });
     }
+  }
 
+  private setFormGroup(): void {
     this.projectForm = this.fb.group({
       name: [this.selectedProject.name],
       description: [this.selectedProject.description],

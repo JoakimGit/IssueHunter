@@ -23,12 +23,12 @@ export class SignupComponent implements OnInit {
       email: [''],
       password: [''],
       confirmPassword: [''],
+      company: [''],
+      isNewCompany: [false],
     });
   }
 
   public onRegister(): void {
-    console.log(this.signupForm);
-
     if (this.signupForm.valid) {
       this.authFacade.register(this.signupForm);
     }
