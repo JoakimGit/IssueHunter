@@ -24,28 +24,20 @@ router.get("/projects", auth, projectController.getProjects);
 router.get("/projects/:id", auth, projectController.getProjectById);
 router.post("/projects", auth, projectController.createProject);
 router.put("/projects/:id", auth, projectController.updateProject);
-router.patch(
-  "/projects/:id/add-user",
-  auth,
-  projectController.addMemberToProject
-);
+router.patch("/projects/:id/add-user", auth, projectController.addMemberToProject); // prettier-ignore
 
 // TICKET ROUTES
-router.get(
-  "/projects/:id/tickets",
-  auth,
-  ticketController.getTicketsByProjectId
-);
+router.get("/projects/:id/tickets", auth, ticketController.getTicketsByProjectId); // prettier-ignore
 router.get("/tickets", auth, ticketController.getTickets);
 router.get("/tickets/:id", auth, ticketController.getTicketById);
 router.post("/tickets", auth, ticketController.createTicket);
 router.put("/tickets/:id", auth, ticketController.updateTicket);
 
-router.get("/public-route", auth, (req: Request, res: Response) => {
-  res.json({ data: "Hi from public route" });
-});
-
 // USER ROUTES
-router.get("/employees", auth, userController.getEmployees);
+router.get("/people", auth, userController.getEmployees);
+router.get("/people/email/:email", auth, userController.getUserByEmail);
+router.patch("/people/:id", auth, userController.updateUserRole);
+router.post("/company/members", auth, userController.addUserToCompany);
+router.delete("/company/members/:id", auth, userController.removeUserFromCompany); // prettier-ignore
 
 export default router;

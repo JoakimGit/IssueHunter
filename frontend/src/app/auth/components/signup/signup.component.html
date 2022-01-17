@@ -1,35 +1,35 @@
 <div class="bg-gray-300 min-h-screen flex flex-col">
   <div class="container max-w-sm mx-auto flex-1 flex flex-col mt-32 px-2">
-    <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-      <h1 class="mb-8 text-3xl text-center">Sign up</h1>
-      <form [formGroup]="signupForm" (ngSubmit)="onRegister()">
+    <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full dark:bg-gray-800 dark:border-gray-700">
+      <h1 class="mb-8 text-3xl text-center dark:text-white">Sign up</h1>
+      <form [formGroup]="signupForm" (ngSubmit)="onRegister()" errorTailor>
 
-        <input type="text" class="block border border-gray-400 w-full p-2 rounded mb-4" formControlName="name" placeholder="Full Name"/>
-        <input type="text" class="block border border-gray-400 w-full p-2 rounded mb-4" formControlName="email" placeholder="Email"/>
-        <input type="password" class="block border border-gray-400 w-full p-2 rounded mb-4" formControlName="password" placeholder="Password"/>
-        <input type="password" class="block border border-gray-400 w-full p-2 rounded mb-4" formControlName="confirmPassword" placeholder="Confirm Password"/>
+        <input type="text" class="block border border-gray-400 w-full p-2 rounded mt-4" formControlName="name" placeholder="Full Name"/>
+        <input type="text" class="block border border-gray-400 w-full p-2 rounded mt-4" formControlName="email" placeholder="Email"/>
+        <input type="password" class="block border border-gray-400 w-full p-2 rounded mt-4" formControlName="password" placeholder="Password"/>
+        <input type="password" class="block border border-gray-400 w-full p-2 rounded mt-4" formControlName="confirmPassword" placeholder="Confirm Password"/>
         
-        <div class="flex items-center mb-4">
+        <div class="flex items-center mt-4">
           <input type="checkbox" name="createCompany" id="createCompany" class="rounded border-gray-400 text-green-500 focus:ring-green-500" formControlName="isNewCompany">
-          <label for="createCompany" class="ml-2 block text-gray-900">I want to create new company</label>
+          <label for="createCompany" class="ml-2 block text-gray-900 dark:text-white">I want to create new company</label>
         </div>
         <ng-container *ngIf="signupForm.get('isNewCompany')!.value">
-          <input type="text" class="block border border-gray-400 w-full p-2 rounded mb-4" formControlName="company" placeholder="Company Name"/>
+          <input type="text" class="block border border-gray-400 w-full p-2 rounded mt-4" formControlName="company" placeholder="Company Name"/>
         </ng-container>
 
-        <button type="submit" class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none my-1">
+        <button type="submit" class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none mt-4">
           Create Account
         </button>        
       </form>
 
-      <div class="text-center text-sm text-gray-500 mt-4">
+      <div class="text-center text-sm text-gray-500 mt-4 dark:text-grey-200">
         By signing up, you agree to the
-        <a class="no-underline border-b border-gray-400" routerLink="../../privacy">
-          Privacy Policy
+        <a class="no-underline border-b border-gray-400" routerLink="../../terms">
+          Terms & Conditions
         </a>
       </div>
 
-      <div class="text-center text-gray-500 mt-6">
+      <div class="text-center text-gray-500 mt-6 dark:text-grey-200">
         Already have an account?
         <a class="no-underline border-b border-blue text-blue-500" routerLink="../login">Log in </a>
       </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/auth/models/user';
+import { Project } from '../../models/project';
 import { ProjectFacade } from '../../project.facade';
 
 @Component({
@@ -11,6 +12,8 @@ import { ProjectFacade } from '../../project.facade';
 })
 export class InviteComponent implements OnInit {
   employees$: Observable<User[]>;
+  public selectedProject: Project;
+
   invitedMembers: string[] = [];
   private projectId: string;
 
@@ -21,7 +24,11 @@ export class InviteComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectId = this.route.snapshot.params['id'];
+
     this.employees$ = this.projectFacade.getEmployees();
+    this.projectFacade.getProjectById(this.projectId).subscribe((resp) => {
+      this.selectedProject = resp;
+    });
   }
 
   public checkBoxChanged(event: any) {

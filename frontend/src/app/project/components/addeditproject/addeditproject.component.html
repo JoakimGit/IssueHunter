@@ -3,7 +3,7 @@
 
     <h1 class="text-gray-600 text-center pt-8 font-bold md:text-2xl text-xl">New Project</h1>
 
-    <form *ngIf="projectForm" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+    <form *ngIf="projectForm" [formGroup]="projectForm" (ngSubmit)="onSubmit()" errorTailor>
       <div class="grid mt-5 mx-7">
         <label for="name" class="md:text-sm text-xs text-gray-500 text-light font-medium">Name</label>
         <input type="text" class="py-2 px-3 rounded-lg border-2 border-cyan-300 mt-1 focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-transparent" placeholder="Project name" formControlName="name"/>
@@ -13,7 +13,7 @@
         <textarea class="py-2 px-3 rounded-lg border-2 border-cyan-300 mt-1 focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-transparent" placeholder="Enter description" formControlName="description" rows="6"></textarea>
       </div>
       <div class='flex items-center justify-center py-5'>
-        <button class='w-auto bg-cyan-500 hover:bg-cyan-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>Create Project</button>
+        <button class='w-auto bg-cyan-500 hover:bg-cyan-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>{{ isAddMode ? 'Create' : 'Update' }} Project</button>
       </div>
     </form>
 

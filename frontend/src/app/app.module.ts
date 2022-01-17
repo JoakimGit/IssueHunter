@@ -11,6 +11,9 @@ import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoadingInterceptor } from './common/interceptors/loading.interceptor';
 import { LoaderComponent } from './common/components/loader/loader.component';
+import { UserModule } from './user/user.module';
+import { ToastrModule } from 'ngx-toastr';
+import { ErrorInterceptor } from './common/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,10 +28,17 @@ import { LoaderComponent } from './common/components/loader/loader.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    UserModule,
+    ToastrModule.forRoot({
+      closeButton: true,
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true,
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })
