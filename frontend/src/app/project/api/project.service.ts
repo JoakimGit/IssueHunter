@@ -33,7 +33,7 @@ export class ProjectService {
   }
 
   public getEmployees(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUri + '/employees');
+    return this.http.get<User[]>(this.apiUri + '/people');
   }
 
   public addMemberToProject(

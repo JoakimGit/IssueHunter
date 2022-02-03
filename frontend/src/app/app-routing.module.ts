@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'projects',
@@ -24,8 +24,14 @@ const routes: Routes = [
         loadChildren: () =>
           import('./ticket/ticket.module').then((m) => m.TicketModule),
       },
+      {
+        path: 'people',
+        loadChildren: () =>
+          import('./user/user.module').then((m) => m.UserModule),
+      },
     ],
   },
+  { path: '**', redirectTo: 'auth/login' },
 ];
 
 @NgModule({

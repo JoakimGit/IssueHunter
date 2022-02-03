@@ -2,13 +2,13 @@
   <div class="flex items-center pb-6">
     <!-- Title -->
     <div>
-      <h1 class="text-2xl text-gray-600 font-medium">Projects</h1>
+      <h1 class="text-2xl text-gray-600 font-medium dark:text-gray-200">Projects</h1>
     </div>
     <!-- Search and buttons -->
     <div class="flex lg:ml-20 ml-10">
       <div class="relative mx-auto">
         <input class="border-2 border-gray-300 bg-white h-10 px-4 rounded-lg focus:outline-none placeholder:text-gray-400"
-          type="search" name="search" placeholder="search...">
+          type="search" name="search" placeholder="search projects...">
         <svg class="text-gray-400 h-4 w-4 fill-current absolute right-0 top-0 mt-3 mr-4" xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966"
           style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">
@@ -17,7 +17,7 @@
         </svg>
       </div>
       <div class="lg:ml-16 ml-8">
-        <button routerLink="new" class="bg-cyan-500 px-4 py-2 rounded-md text-white font-medium tracking-wide cursor-pointer">New Project</button>
+        <button routerLink="new" class="bg-cyan-500 px-4 py-2 rounded-md text-white font-medium tracking-wide cursor-pointer dark:bg-violet-800">New Project</button>
       </div>
     </div>
   </div>
@@ -54,12 +54,9 @@
             <div class="my-2">
               <p class="font-medium text-base mb-2">Team Members</p>
               <div class="flex space-x-1">
-                <img src="https://i.pravatar.cc/200?u=12btd543hfd"
-                class="w-6 h-6 rounded-full"/>
-                <img src="https://i.pravatar.cc/200?u=2"
-                class="w-6 h-6 rounded-full"/>
-                <img src="https://i.pravatar.cc/200?u=3"
-                class="w-6 h-6 rounded-full"/>
+                <ng-container *ngFor="let employee of project.members">
+                  <img src="https://i.pravatar.cc/200?u={{ employee._id }}" class="w-6 h-6 rounded-full" alt="member portrait" title="{{ employee.name }}"/>
+                </ng-container>
               </div>
             </div>
             <a [routerLink]="['/projects', project._id, 'invite']" class="mt-auto mb-2">

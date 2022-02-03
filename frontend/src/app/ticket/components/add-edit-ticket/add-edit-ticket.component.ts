@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Ticket } from '../../models/ticket';
 import { TicketFacade } from '../../ticket.facade';
@@ -39,8 +39,8 @@ export class AddEditTicketComponent implements OnInit {
 
   private setFormGroup(): void {
     this.ticketForm = this.fb.group({
-      name: [this.selectedTicket.name],
-      description: [this.selectedTicket.description],
+      name: [this.selectedTicket.name, Validators.required],
+      description: [this.selectedTicket.description, Validators.required],
       priority: [this.selectedTicket.priority],
       status: [this.selectedTicket.status],
       type: [this.selectedTicket.type],

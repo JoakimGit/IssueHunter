@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationFacade } from '../../auth.facade';
 import { TokenPayload } from '../../models/token';
 import { User } from '../../models/user';
@@ -19,10 +19,10 @@ export class SignupComponent implements OnInit {
 
   public ngOnInit(): void {
     this.signupForm = this.fb.group({
-      name: [''],
-      email: [''],
-      password: [''],
-      confirmPassword: [''],
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
       company: [''],
       isNewCompany: [false],
     });

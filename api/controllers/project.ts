@@ -3,7 +3,9 @@ import Project from "../models/project";
 
 const getProjects = async (req: Request, res: Response) => {
   try {
-    const projects = await Project.find({ company: req.payload.company });
+    const projects = await Project.find({
+      company: req.payload.company
+    }).populate("members");
     res.status(200).json({ projects });
   } catch (error) {
     console.error(error);
@@ -41,7 +43,7 @@ const updateProject = async (req: Request, res: Response) => {
     let project = await Project.findById(id);
 
     if (!project) {
-      res.status(404).json({ msg: `No project exists with id: ${id}` });
+      res.status(404).json({ message: `No project exists with id: ${id}` });
       return;
     }
     project.name = name;
@@ -65,7 +67,7 @@ const addMemberToProject = async (req: Request, res: Response) => {
     let project = await Project.findById(id);
 
     if (!project) {
-      res.status(404).json({ msg: `No project exists with id: ${id}` });
+      res.status(404).json({ message: `No project exists with id: ${id}` });
       return;
     }
     project.members = [...project.members, ...members];

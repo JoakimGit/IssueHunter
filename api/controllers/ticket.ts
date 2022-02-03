@@ -17,7 +17,7 @@ const getTicketsByProjectId = async (req: Request, res: Response) => {
     if (project) {
       res.status(200).json({ tickets: project.tickets });
     } else {
-      res.status(404).json({ msg: `No project with id ${req.params.id}` });
+      res.status(404).json({ message: `No project with id ${req.params.id}` });
     }
   } catch (error) {
     console.error(error);
@@ -30,7 +30,7 @@ const getTicketById = async (req: Request, res: Response) => {
     if (ticket) {
       res.status(200).json(ticket);
     } else {
-      res.status(404).json({ msg: `No ticket with id ${req.params.id}` });
+      res.status(404).json({ message: `No ticket with id ${req.params.id}` });
     }
   } catch (error) {
     console.error(error);
@@ -75,7 +75,7 @@ const updateTicket = async (req: Request, res: Response) => {
     let ticket = await Ticket.findById(id);
 
     if (!ticket) {
-      res.status(404).json({ msg: `No project exists with id: ${id}` });
+      res.status(404).json({ message: `No project exists with id: ${id}` });
       return;
     }
     ticket.name = name;
