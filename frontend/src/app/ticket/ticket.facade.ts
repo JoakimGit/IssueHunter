@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { TicketService } from './api/ticket.service';
+import { Comment } from './models/comment';
 import { Ticket } from './models/ticket';
 
 @Injectable({
@@ -19,6 +20,12 @@ export class TicketFacade {
   public loadTicketsByProjectId(projectId: string): Observable<Ticket[]> {
     return this.ticketService
       .getTicketsByProjectId(projectId)
+      .pipe(map((data: any) => data.tickets));
+  }
+
+  public getTicketsByUserId(userId: string): Observable<Ticket[]> {
+    return this.ticketService
+      .getTicketsByUserId(userId)
       .pipe(map((data: any) => data.tickets));
   }
 
@@ -40,5 +47,12 @@ export class TicketFacade {
 
   public getTicketById(id: string): Observable<Ticket> {
     return this.ticketService.getTicketById(id);
+  }
+
+  public addCommentToTicket(
+    content: string,
+    ticketId: string
+  ): Observable<Comment> {
+    return this.ticketService.addCommentToTicket(content, ticketId);
   }
 }

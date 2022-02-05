@@ -1,0 +1,37 @@
+<div class="w-full rounded-md p-12">
+  <div class="mb-2 flex items-center" *ngIf="project$ | async as project">
+    <h1 class="mr-6 text-2xl font-medium text-gray-600 dark:text-gray-100">
+      {{ project.name }}
+    </h1>
+    <div class="flex gap-1">
+      <ng-container *ngFor="let employee of project.members">
+        <img
+          src="https://i.pravatar.cc/200?u={{ employee }}"
+          class="h-7 w-7 rounded-full"
+          alt="member portrait"
+        />
+      </ng-container>
+    </div>
+  </div>
+  <!-- Header -->
+  <div class="flex items-center pb-6">
+    <!-- Title -->
+    <div>
+      <h2 class="text-xl font-medium text-gray-600 dark:text-gray-100">
+        My Tickets
+      </h2>
+    </div>
+    <!-- Search and buttons -->
+    <div class="ml-8 flex items-center">
+      <search-input
+        [searchPlaceholder]="'search tickets...'"
+        [formControl]="filterInput"
+        ngDefaultControl
+      ></search-input>
+    </div>
+  </div>
+
+  <ng-container *ngIf="tickets$ | async as tickets">
+    <ticket-list [tickets]="tickets" [searchTerm]="searchTerm"></ticket-list>
+  </ng-container>
+</div>

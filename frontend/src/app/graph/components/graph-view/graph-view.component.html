@@ -1,0 +1,75 @@
+<div class="grid grid-cols-1 gap-16 gap-y-24 p-24 lg:grid-cols-2 lg:px-32">
+  <div class="relative rounded bg-gray-200 p-4">
+    <div class="h-[300px] bg-gray-200">
+      <ngx-charts-line-chart
+        [xAxis]="true"
+        [yAxis]="true"
+        [results]="openTicketsData"
+      >
+      </ngx-charts-line-chart>
+    </div>
+    <div
+      class="absolute left-0 right-0 -bottom-12 -mt-4 rounded bg-white p-4 text-lg text-gray-500"
+    >
+      Open tickets for period Jan 20 to Jan 26
+    </div>
+  </div>
+
+  <div class="relative rounded bg-gray-200 p-4">
+    <div class="h-[300px] bg-gray-200">
+      <ngx-charts-pie-chart
+        [results]="ticketPriorityData"
+        [legend]="true"
+        [legendTitle]="'Tickets'"
+        [doughnut]="true"
+      >
+      </ngx-charts-pie-chart>
+      <div
+        class="absolute left-0 right-0 -bottom-12 -mt-4 rounded bg-white p-4 text-lg text-gray-500"
+      >
+        Tickets by priority
+      </div>
+    </div>
+  </div>
+
+  <div class="relative rounded bg-gray-200 p-4">
+    <div class="h-[300px] rounded-md bg-gray-200">
+      <ngx-charts-bar-vertical
+        [results]="ticketStatusData"
+        [xAxis]="true"
+        [yAxis]="true"
+        [barPadding]="80"
+      >
+        <ng-template #tooltipTemplate let-model="model">
+          <div class="py-2">
+            <p class="text-base font-medium">{{ model.extra.tooltip }}</p>
+            <p>{{ model.value }}</p>
+          </div>
+        </ng-template>
+      </ngx-charts-bar-vertical>
+    </div>
+    <div
+      class="absolute left-0 right-0 -bottom-12 -mt-4 rounded bg-white p-4 text-lg text-gray-500"
+    >
+      Tickets by status
+    </div>
+  </div>
+
+  <div class="relative rounded bg-gray-200 p-4">
+    <div class="h-[300px] bg-gray-200">
+      <ngx-charts-pie-chart
+        [results]="ticketTypeData"
+        [legend]="true"
+        [legendTitle]="'Tickets'"
+        [doughnut]="true"
+        [scheme]="'nightLights'"
+      >
+      </ngx-charts-pie-chart>
+      <div
+        class="absolute left-0 right-0 -bottom-12 -mt-4 rounded bg-white p-4 text-lg text-gray-500"
+      >
+        Tickets by type
+      </div>
+    </div>
+  </div>
+</div>

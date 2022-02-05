@@ -10,12 +10,17 @@ export interface TicketDoc extends mongoose.Document {
   assignedTo: string;
   submitter: string;
   dueDate: Date;
+  comments: any[];
+  project: string;
 }
 
 const commentSchema = new Schema(
   {
-    text: String,
-    postedBy: String
+    content: String,
+    postedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    }
   },
   { timestamps: true }
 );
@@ -52,11 +57,13 @@ const ticketSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User"
     },
+    project: String,
     comments: [commentSchema]
   },
   { timestamps: true }
 );
 
 const Ticket = mongoose.model<TicketDoc>("Ticket", ticketSchema);
+export const Comment = mongoose.model("Comment", commentSchema);
 
 export default Ticket;

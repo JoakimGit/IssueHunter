@@ -14,6 +14,7 @@ import { LoaderComponent } from './common/components/loader/loader.component';
 import { UserModule } from './user/user.module';
 import { ToastrModule } from 'ngx-toastr';
 import { ErrorInterceptor } from './common/interceptors/error.interceptor';
+import { UnderConstructionComponent } from './common/components/under-construction/under-construction.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ErrorInterceptor } from './common/interceptors/error.interceptor';
     HeaderComponent,
     LayoutComponent,
     LoaderComponent,
+    UnderConstructionComponent,
   ],
   imports: [
     BrowserModule,

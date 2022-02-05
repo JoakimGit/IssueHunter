@@ -49,7 +49,14 @@ export class ProjectFacade {
 
   public addMemberToProject(userIds: string[], projectId: string): void {
     this.projectService.addMemberToProject(userIds, projectId).subscribe(() => {
+      this.router.navigate([`projects/${projectId}/tickets`]);
       this.toastr.success('Member added to project', 'Success');
     });
+  }
+
+  public getProjectMembers(projectId: string): Observable<User[]> {
+    return this.projectService
+      .getProjectMembers(projectId)
+      .pipe(map((data: any) => data.members));
   }
 }

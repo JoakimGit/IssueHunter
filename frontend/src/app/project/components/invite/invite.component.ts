@@ -12,7 +12,7 @@ import { ProjectFacade } from '../../project.facade';
 })
 export class InviteComponent implements OnInit {
   employees$: Observable<User[]>;
-  public selectedProject: Project;
+  selectedProject$: Observable<Project>;
 
   invitedMembers: string[] = [];
   private projectId: string;
@@ -26,9 +26,7 @@ export class InviteComponent implements OnInit {
     this.projectId = this.route.snapshot.params['id'];
 
     this.employees$ = this.projectFacade.getEmployees();
-    this.projectFacade.getProjectById(this.projectId).subscribe((resp) => {
-      this.selectedProject = resp;
-    });
+    this.selectedProject$ = this.projectFacade.getProjectById(this.projectId);
   }
 
   public checkBoxChanged(event: any) {

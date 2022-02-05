@@ -22,6 +22,7 @@ router.post("/login", authenticationController.login);
 // PROJECT ROUTES
 router.get("/projects", auth, projectController.getProjects);
 router.get("/projects/:id", auth, projectController.getProjectById);
+router.get("/projects/:id/members", auth, projectController.getProjectMembers);
 router.post("/projects", auth, projectController.createProject);
 router.put("/projects/:id", auth, projectController.updateProject);
 router.patch("/projects/:id/add-user", auth, projectController.addMemberToProject); // prettier-ignore
@@ -30,8 +31,10 @@ router.patch("/projects/:id/add-user", auth, projectController.addMemberToProjec
 router.get("/projects/:id/tickets", auth, ticketController.getTicketsByProjectId); // prettier-ignore
 router.get("/tickets", auth, ticketController.getTickets);
 router.get("/tickets/:id", auth, ticketController.getTicketById);
+router.get("/tickets/user/:id", auth, ticketController.getTicketsByUserId);
 router.post("/tickets", auth, ticketController.createTicket);
 router.put("/tickets/:id", auth, ticketController.updateTicket);
+router.post("/tickets/:id/comments", auth, ticketController.addComment);
 
 // USER ROUTES
 router.get("/people", auth, userController.getEmployees);

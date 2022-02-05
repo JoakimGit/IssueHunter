@@ -47,4 +47,10 @@ export class ProjectService {
       }
     );
   }
+
+  public getProjectMembers(projectId: string): Observable<User[]> {
+    return this.http.get<User[]>(
+      this.apiUri + `/projects/${projectId}/members`
+    );
+  }
 }
