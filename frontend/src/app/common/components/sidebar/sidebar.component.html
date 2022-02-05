@@ -1,12 +1,37 @@
-<div class="h-full w-48 space-y-6 py-7 px-2 border-r border-slate-300 dark:text-gray-100 dark:border-slate-700">
-  <div class="px-2 pb-4 border-b">
-    <p class="text-xl uppercase">Welcome,</p> 
-    <p class="text-l">{{ authFacade.getUserDetails()?.name }}</p></div>
+<div
+  class="h-full w-48 space-y-6 border-r border-slate-300 py-7 px-2 dark:border-slate-700 dark:text-gray-100"
+>
+  <div class="border-b px-2 pb-4">
+    <p class="text-xl uppercase">Welcome,</p>
+    <p class="text-l">{{ authFacade.getUserDetails()?.name }}</p>
+  </div>
 
   <nav>
-    <a routerLink="" class=" block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-100 dark:hover:bg-blue-400">Dashboard</a>
-    <a routerLink="projects" class=" block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-100 dark:hover:bg-blue-400">Projects</a>
-    <a routerLink="graphs" class=" block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-100 dark:hover:bg-blue-400">Graphs</a>
-    <a routerLink="people" class=" block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-100 dark:hover:bg-blue-400" *ngIf="authFacade.getUserDetails()?.role === 'Admin'">People</a>
+    <a
+      routerLink=""
+      class="block rounded py-2.5 px-4 transition duration-200 hover:bg-blue-100 dark:hover:bg-blue-400"
+      >Dashboard</a
+    >
+    <a
+      routerLink="projects"
+      class="block rounded py-2.5 px-4 transition duration-200 hover:bg-blue-100 dark:hover:bg-blue-400"
+      >Projects</a
+    >
+    <a
+      routerLink="tickets"
+      class="block rounded py-2.5 px-4 transition duration-200 hover:bg-blue-100 dark:hover:bg-blue-400"
+      >My Tickets</a
+    >
+    <a
+      routerLink="graphs"
+      class="block rounded py-2.5 px-4 transition duration-200 hover:bg-blue-100 dark:hover:bg-blue-400"
+      >Graphs</a
+    >
+    <a
+      routerLink="people"
+      class="block rounded py-2.5 px-4 transition duration-200 hover:bg-blue-100 dark:hover:bg-blue-400"
+      *ngIf="authFacade.getUserDetails()?.role === 'Admin'"
+      >People</a
+    >
   </nav>
 </div>

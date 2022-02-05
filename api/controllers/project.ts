@@ -79,10 +79,21 @@ const addMemberToProject = async (req: Request, res: Response) => {
   }
 };
 
-export {
-  getProjects,
-  createProject,
-  updateProject,
-  getProjectById,
-  addMemberToProject
+const getProjectMembers = async (req: Request, res: Response) => {
+  const id = req.params.id;
+
+  try {
+    let project = await Project.findById(id).populate("members");
+
+    if (!project) {
+      res.status(404).json({ message: `No project exists with id: ${id}` });
+      return;
+    }
+
+    res.status(201).json({ members: project.members });
+  } catch (error) {
+    console.error(error);
+  }
 };
+
+export { getProjects, createProject, updateProject, getProjectById, addMemberToProject, getProjectMembers };

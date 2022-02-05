@@ -1,21 +1,48 @@
-<div class="flex items-center justify-center h-full">
-  <div class="grid bg-white rounded-lg shadow-xl w-3/4 md:w-1/2 lg:w-1/3"> 
+<div class="flex h-full items-center justify-center">
+  <div class="grid w-3/4 rounded-lg bg-white shadow-xl md:w-1/2 lg:w-1/3">
+    <h1 class="pt-8 text-center text-xl font-bold text-gray-600 md:text-2xl">
+      New Project
+    </h1>
 
-    <h1 class="text-gray-600 text-center pt-8 font-bold md:text-2xl text-xl">New Project</h1>
-
-    <form *ngIf="projectForm" [formGroup]="projectForm" (ngSubmit)="onSubmit()" errorTailor>
-      <div class="grid mt-5 mx-7">
-        <label for="name" class="md:text-sm text-xs text-gray-500 text-light font-medium">Name</label>
-        <input type="text" class="py-2 px-3 rounded-lg border-2 border-cyan-300 mt-1 focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-transparent" placeholder="Project name" formControlName="name"/>
+    <form
+      *ngIf="projectForm"
+      [formGroup]="projectForm"
+      (ngSubmit)="onSubmit()"
+      errorTailor
+    >
+      <div class="mx-7 mt-5 grid">
+        <label
+          for="name"
+          class="text-light text-xs font-medium text-gray-500 md:text-sm"
+          >Name</label
+        >
+        <input
+          type="text"
+          class="mt-1 rounded-lg border-2 border-cyan-300 py-2 px-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-cyan-600"
+          placeholder="Project name"
+          formControlName="name"
+        />
       </div>
-      <div class="grid mt-5 mx-7">
-        <label for="description" class="md:text-sm text-xs text-gray-500 text-light font-medium">Description</label>
-        <textarea class="py-2 px-3 rounded-lg border-2 border-cyan-300 mt-1 focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-transparent" placeholder="Enter description" formControlName="description" rows="6"></textarea>
+      <div class="mx-7 mt-5 grid">
+        <label
+          for="description"
+          class="text-light text-xs font-medium text-gray-500 md:text-sm"
+          >Description</label
+        >
+        <textarea
+          class="mt-1 rounded-lg border-2 border-cyan-300 py-2 px-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-cyan-600"
+          placeholder="Enter description"
+          formControlName="description"
+          rows="6"
+        ></textarea>
       </div>
-      <div class='flex items-center justify-center py-5'>
-        <button class='w-auto bg-cyan-500 hover:bg-cyan-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>{{ isAddMode ? 'Create' : 'Update' }} Project</button>
+      <div class="flex items-center justify-center py-5">
+        <button
+          class="w-auto rounded-lg bg-cyan-500 px-4 py-2 font-medium text-white shadow-xl hover:bg-cyan-700"
+        >
+          {{ isAddMode ? "Create" : "Update" }} Project
+        </button>
       </div>
     </form>
-
   </div>
 </div>

@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorTailorModule } from '@ngneat/error-tailor';
+import { SearchInputComponent } from './components/search-input/search-input.component';
+import { ListFilterPipe } from './pipes/list-filter.pipe';
 
 @NgModule({
-  declarations: [],
+  declarations: [SearchInputComponent, ListFilterPipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,6 +23,12 @@ import { ErrorTailorModule } from '@ngneat/error-tailor';
       },
     }),
   ],
-  exports: [FormsModule, ReactiveFormsModule, ErrorTailorModule],
+  exports: [
+    FormsModule,
+    ReactiveFormsModule,
+    ErrorTailorModule,
+    SearchInputComponent,
+    ListFilterPipe,
+  ],
 })
 export class SharedModule {}
