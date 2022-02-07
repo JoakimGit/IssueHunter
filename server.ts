@@ -1,5 +1,5 @@
 require("dotenv").config();
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 const app = express();
 import passport from "passport";
 import routesApi from "./api/routes";
