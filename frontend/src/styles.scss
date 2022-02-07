@@ -1,7 +1,6 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
 *,
 *::before,
 *::after {
@@ -12,4 +11,8 @@
 
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.control-error {
+  @apply text-sm text-red-500;
 }

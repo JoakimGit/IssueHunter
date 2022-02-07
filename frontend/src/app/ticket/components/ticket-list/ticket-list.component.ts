@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
 import { Ticket } from '../../models/ticket';
-import { TicketFacade } from '../../ticket.facade';
 
 @Component({
   selector: 'ticket-list',
@@ -10,15 +7,10 @@ import { TicketFacade } from '../../ticket.facade';
   styles: [],
 })
 export class TicketListComponent implements OnInit {
-  tickets$: Observable<Ticket[]>;
+  @Input()
+  tickets: Ticket[];
+  @Input()
+  searchTerm: string;
 
-  constructor(
-    private ticketFacade: TicketFacade,
-    private route: ActivatedRoute
-  ) {}
-
-  ngOnInit(): void {
-    const projectId: string = this.route.snapshot.params['id'];
-    this.tickets$ = this.ticketFacade.loadTicketsByProjectId(projectId);
-  }
+  ngOnInit(): void {}
 }

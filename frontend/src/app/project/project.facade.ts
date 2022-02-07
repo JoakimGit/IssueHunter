@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { map, Observable, tap } from 'rxjs';
 import { User } from '../auth/models/user';
 import { ProjectService } from './api/project.service';
 import { Project } from './models/project';
@@ -12,7 +13,8 @@ export class ProjectFacade {
   constructor(
     private projectService: ProjectService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
   ) {}
 
   public loadProjects(): Observable<Project[]> {
@@ -24,12 +26,14 @@ export class ProjectFacade {
   public createProject(project: Project): void {
     this.projectService.createProject(project).subscribe((resp) => {
       this.router.navigate(['projects']);
+      this.toastr.success('Project created', 'Success');
     });
   }
 
   public updateProject(project: Project): void {
     this.projectService.updateProject(project).subscribe((resp) => {
       this.router.navigate(['projects']);
+      this.toastr.success('Project updated', 'Success');
     });
   }
 
@@ -44,6 +48,15 @@ export class ProjectFacade {
   }
 
   public addMemberToProject(userIds: string[], projectId: string): void {
-    this.projectService.addMemberToProject(userIds, projectId).subscribe();
+    this.projectService.addMemberToProject(userIds, projectId).subscribe(() => {
+      this.router.navigate([`projects/${projectId}/tickets`]);
+      this.toastr.success('Member added to project', 'Success');
+    });
+  }
+
+  public getProjectMembers(projectId: string): Observable<User[]> {
+    return this.projectService
+      .getProjectMembers(projectId)
+      .pipe(map((data: any) => data.members));
   }
 }

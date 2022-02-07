@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '../../models/project';
 import { ProjectFacade } from '../../project.facade';
@@ -37,8 +37,8 @@ export class AddeditprojectComponent implements OnInit {
 
   private setFormGroup(): void {
     this.projectForm = this.fb.group({
-      name: [this.selectedProject.name],
-      description: [this.selectedProject.description],
+      name: [this.selectedProject.name, Validators.required],
+      description: [this.selectedProject.description, Validators.required],
     });
   }
 

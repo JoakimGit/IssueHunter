@@ -2,8 +2,22 @@ import { Request, Response } from "express";
 import Project from "../models/project";
 
 const getProjects = async (req: Request, res: Response) => {
+  const userRole = req.payload.role;
+
   try {
-    const projects = await Project.find({ company: req.payload.company });
+    let projects;
+
+    if (userRole === "Admin") {
+      projects = await Project.find({
+        company: req.payload.company
+      }).populate("members");
+    } else {
+      projects = await Project.find({
+        company: req.payload.company,
+        members: req.payload._id
+      }).populate("members");
+    }
+
     res.status(200).json({ projects });
   } catch (error) {
     console.error(error);
@@ -41,7 +55,7 @@ const updateProject = async (req: Request, res: Response) => {
     let project = await Project.findById(id);
 
     if (!project) {
-      res.status(404).json({ msg: `No project exists with id: ${id}` });
+      res.status(404).json({ message: `No project exists with id: ${id}` });
       return;
     }
     project.name = name;
@@ -65,7 +79,7 @@ const addMemberToProject = async (req: Request, res: Response) => {
     let project = await Project.findById(id);
 
     if (!project) {
-      res.status(404).json({ msg: `No project exists with id: ${id}` });
+      res.status(404).json({ message: `No project exists with id: ${id}` });
       return;
     }
     project.members = [...project.members, ...members];
@@ -77,10 +91,21 @@ const addMemberToProject = async (req: Request, res: Response) => {
   }
 };
 
-export {
-  getProjects,
-  createProject,
-  updateProject,
-  getProjectById,
-  addMemberToProject
+const getProjectMembers = async (req: Request, res: Response) => {
+  const id = req.params.id;
+
+  try {
+    let project = await Project.findById(id).populate("members");
+
+    if (!project) {
+      res.status(404).json({ message: `No project exists with id: ${id}` });
+      return;
+    }
+
+    res.status(201).json({ members: project.members });
+  } catch (error) {
+    console.error(error);
+  }
 };
+
+export { getProjects, createProject, updateProject, getProjectById, addMemberToProject, getProjectMembers };

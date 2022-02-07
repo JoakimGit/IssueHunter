@@ -7,7 +7,7 @@ import {
   HttpResponse,
   HttpEventType,
 } from '@angular/common/http';
-import { finalize, map, Observable } from 'rxjs';
+import { finalize, map, Observable, tap } from 'rxjs';
 import { LoadingService } from '../services/loading.service';
 
 @Injectable()
@@ -18,15 +18,9 @@ export class LoadingInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    // return next.handle(request);
     this.loadingService.show();
-    return next.handle(request).pipe(
-      map((event: any) => {
-        if (event instanceof HttpResponse) {
-          this.loadingService.hide();
-        }
-        return event;
-      })
-    );
+    return next
+      .handle(request)
+      .pipe(finalize(() => this.loadingService.hide()));
   }
 }

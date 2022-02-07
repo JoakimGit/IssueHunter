@@ -33,7 +33,7 @@ export class ProjectService {
   }
 
   public getEmployees(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUri + '/employees');
+    return this.http.get<User[]>(this.apiUri + '/people');
   }
 
   public addMemberToProject(
@@ -45,6 +45,12 @@ export class ProjectService {
       {
         members: userIds,
       }
+    );
+  }
+
+  public getProjectMembers(projectId: string): Observable<User[]> {
+    return this.http.get<User[]>(
+      this.apiUri + `/projects/${projectId}/members`
     );
   }
 }

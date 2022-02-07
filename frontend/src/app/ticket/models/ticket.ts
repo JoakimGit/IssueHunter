@@ -4,6 +4,7 @@ import {
   TicketStatus,
   TicketType,
 } from 'src/app/shared/enums/ticket';
+import { Comment } from './comment';
 
 export class Ticket {
   _id: string;
@@ -17,7 +18,7 @@ export class Ticket {
   createdAt: Date;
   updatedAt: Date;
   dueDate: Date;
-  comments: string[];
+  comments: Comment[];
   projectId: string;
 
   constructor() {}

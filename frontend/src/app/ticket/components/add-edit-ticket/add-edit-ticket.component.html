@@ -1,23 +1,86 @@
-<div class="flex items-center justify-center h-full">
-  <div class="grid bg-white rounded-lg shadow-xl w-3/4 md:w-1/2 lg:w-1/3"> 
+<div class="flex h-full items-center justify-center">
+  <div class="grid w-3/4 rounded-lg bg-white shadow-xl md:w-3/5 lg:w-2/5">
+    <div class="mx-7 flex justify-between pt-8">
+      <h1 class="text-xl font-bold text-gray-600 md:text-2xl">Ticket</h1>
+      <a routerLink="../"
+        ><div
+          class="rounded-lg px-4 py-2 font-medium shadow-md dark:bg-slate-400 dark:text-white"
+        >
+          <button>Go Back</button>
+        </div></a
+      >
+    </div>
 
-    <h1 class="text-gray-600 text-center pt-8 font-bold md:text-2xl text-xl">New Ticket</h1>
+    <form
+      class="mb-8"
+      *ngIf="ticketForm"
+      [formGroup]="ticketForm"
+      (ngSubmit)="onSubmit()"
+      errorTailor
+    >
+      <div
+        class="mx-7 mt-5 grid grid-cols-1 gap-5 md:grid-cols-[1fr_max-content] md:gap-8"
+      >
+        <div class="grid">
+          <label
+            for="name"
+            class="text-light text-xs font-medium text-gray-500 md:text-sm"
+            >Name</label
+          >
+          <input
+            type="text"
+            class="mt-1 rounded-lg border-2 border-cyan-300 py-2 px-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-cyan-600"
+            placeholder="Title"
+            formControlName="name"
+          />
+        </div>
 
-    <form *ngIf="ticketForm" [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
-      <div class="grid mt-5 mx-7">
-        <label for="name" class="md:text-sm text-xs text-gray-500 text-light font-medium">Name</label>
-        <input type="text" class="py-2 px-3 rounded-lg border-2 border-cyan-300 mt-1 focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-transparent" placeholder="Title" formControlName="name"/>
-      </div>
-      <div class="grid mt-5 mx-7">
-        <label for="description" class="md:text-sm text-xs text-gray-500 text-light font-medium">Description</label>
-        <textarea class="py-2 px-3 rounded-lg border-2 border-cyan-300 mt-1 focus:outline-none focus:ring-2 focus:ring-cyan-600 focus:border-transparent" placeholder="Description" formControlName="description" rows="6"></textarea>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
-        <div class="">
-          <label for="priority" class="md:text-sm text-xs text-gray-500 text-light font-medium">Priority</label>
+        <div class="ml-auto">
+          <label
+            for="assignedTo"
+            class="text-light text-xs font-medium text-gray-500 md:text-sm"
+            >Assigned To</label
+          >
           <div>
-            <select formControlName="priority" class="border-cyan-300 rounded-lg mt-1">
+            <select
+              formControlName="assignedTo"
+              class="mt-1 rounded-lg border-2 border-cyan-300"
+            >
+              <option value="">None</option>
+              <ng-container *ngFor="let member of projectMembers$ | async">
+                <option value="{{ member._id }}">{{ member.name }}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-7 mt-5 grid">
+        <label
+          for="description"
+          class="text-light text-xs font-medium text-gray-500 md:text-sm"
+          >Description</label
+        >
+        <textarea
+          class="mt-1 rounded-lg border-2 border-cyan-300 py-2 px-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-cyan-600"
+          placeholder="Description"
+          formControlName="description"
+          rows="6"
+        ></textarea>
+      </div>
+
+      <div class="mx-7 mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-8">
+        <div class="">
+          <label
+            for="priority"
+            class="text-light text-xs font-medium text-gray-500 md:text-sm"
+            >Priority</label
+          >
+          <div>
+            <select
+              formControlName="priority"
+              class="mt-1 rounded-lg border-cyan-300"
+            >
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
               <option value="High">High</option>
@@ -27,9 +90,16 @@
         </div>
 
         <div class="">
-          <label for="status" class="md:text-sm text-xs text-gray-500 text-light font-medium">Status</label>
+          <label
+            for="status"
+            class="text-light text-xs font-medium text-gray-500 md:text-sm"
+            >Status</label
+          >
           <div>
-            <select formControlName="status" class="border-cyan-300 rounded-lg mt-1">
+            <select
+              formControlName="status"
+              class="mt-1 rounded-lg border-cyan-300"
+            >
               <option value="Open">Open</option>
               <option value="In Progress">In Progress</option>
               <option value="Ready For Review">Ready For Review</option>
@@ -39,11 +109,18 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 mt-5 mx-7">
+      <div class="mx-7 mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-8">
         <div class="">
-          <label for="type" class="md:text-sm text-xs text-gray-500 text-light font-medium">Type</label>
+          <label
+            for="type"
+            class="text-light text-xs font-medium text-gray-500 md:text-sm"
+            >Type</label
+          >
           <div>
-            <select formControlName="type" class="border-cyan-300 rounded-lg mt-1">
+            <select
+              formControlName="type"
+              class="mt-1 rounded-lg border-cyan-300"
+            >
               <option value="Task">Task</option>
               <option value="Bug">Bug</option>
               <option value="Feature">Feature</option>
@@ -52,17 +129,93 @@
           </div>
         </div>
 
-        <div class="grid">
-          <label for="dueDate" class="md:text-sm text-xs text-gray-500 text-light font-medium">Due Date</label>
-          <input type="date" class="border-cyan-300 rounded-lg mt-1" formControlName="dueDate">
+        <div class="">
+          <label
+            for="dueDate"
+            class="text-light text-xs font-medium text-gray-500 md:text-sm"
+            >Due Date</label
+          >
+          <div>
+            <input
+              type="date"
+              class="mt-1 rounded-lg border-cyan-300"
+              formControlName="dueDate"
+            />
+          </div>
         </div>
-
       </div>
-      
-      <div class='flex items-center justify-center py-5'>
-        <button class='w-auto bg-cyan-500 hover:bg-cyan-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>Create ticket</button>
+
+      <div class="mt-4 flex items-center justify-center py-5">
+        <button
+          class="w-auto rounded-lg bg-cyan-500 px-4 py-2 font-medium text-white shadow-xl hover:bg-cyan-700"
+        >
+          {{ isAddMode ? "Create" : "Update" }} ticket
+        </button>
       </div>
     </form>
 
+    <!-- Comment section -->
+
+    <div *ngIf="selectedTicket">
+      <ng-container *ngIf="selectedTicket.comments as comments">
+        <div
+          class="mx-7 mb-7 flex items-center gap-4 border-t border-slate-300 pt-8"
+          *ngFor="let comment of comments"
+        >
+          <div class="shrink-0">
+            <img
+              src="https://i.pravatar.cc/200?u={{ comment.postedBy._id }}"
+              class="h-8 w-8 rounded-full"
+              alt="member portrait"
+              title="{{ comment.postedBy.name }}"
+            />
+          </div>
+          <div class="grow space-y-1">
+            <div class="flex items-center justify-between">
+              <p class="font-medium">
+                {{ comment.postedBy.name }}
+              </p>
+              <p class="text-xs text-slate-400">
+                {{ comment.createdAt | date: "MMM dd, yyyy h:mm a" }}
+              </p>
+            </div>
+            <div>
+              {{ comment.content }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Add comment -->
+    <ng-container *ngIf="selectedTicket?._id">
+      <div
+        *ngIf="commentForm"
+        class="mx-7 mb-40 border-t border-slate-300 pt-6"
+      >
+        <h2 class="ml-12 mb-4 text-lg font-medium">Comment</h2>
+        <div class="flex gap-4">
+          <div *ngIf="user">
+            <img
+              src="https://i.pravatar.cc/200?u={{ user._id }}"
+              class="h-8 w-8 rounded-full"
+              alt="member portrait"
+              title="{{ user.name }}"
+            />
+          </div>
+          <form
+            class="w-full"
+            [formGroup]="commentForm"
+            (keydown.enter)="onCommentSubmit($event)"
+          >
+            <textarea
+              class="w-full rounded-lg border-2 border-cyan-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-cyan-600"
+              placeholder="Leave a comment..."
+              formControlName="content"
+            ></textarea>
+          </form>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </div>
