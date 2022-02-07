@@ -26,4 +26,8 @@ export class LoginComponent implements OnInit {
       this.authFacade.login(this.loginForm);
     }
   }
+
+  public guestLogin(): void {
+    this.authFacade.guestLogin();
+  }
 }

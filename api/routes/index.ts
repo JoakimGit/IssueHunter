@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import jwt from "express-jwt";
 const router = express.Router();
 
@@ -18,6 +18,7 @@ const auth = jwt({
 // AUTHENTICATION ROUTES
 router.post("/register", authenticationController.register);
 router.post("/login", authenticationController.login);
+router.post("/guestlogin", authenticationController.guestLogin);
 
 // PROJECT ROUTES
 router.get("/projects", auth, projectController.getProjects);

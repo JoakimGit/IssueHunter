@@ -44,4 +44,11 @@ const login = async (req: Request, res: Response) => {
   })(req, res);
 };
 
-export { register, login };
+const guestLogin = async (req: Request, res: Response) => {
+  console.log("REQUEST:", req.body);
+
+  req.body = { email: process.env.GUEST_LOGIN_EMAIL, password: process.env.GUEST_LOGIN_PASSWORD };
+  return login(req, res);
+};
+
+export { register, login, guestLogin };

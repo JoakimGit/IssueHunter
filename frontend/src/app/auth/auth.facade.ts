@@ -80,4 +80,13 @@ export class AuthenticationFacade {
       }
     });
   }
+
+  public guestLogin(): void {
+    this.authService.guestLogin().subscribe((resp) => {
+      if (resp.token) {
+        this.saveToken(resp.token);
+        this.router.navigate(['projects'], { relativeTo: this.route });
+      }
+    });
+  }
 }

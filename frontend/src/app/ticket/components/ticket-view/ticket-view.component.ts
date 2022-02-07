@@ -10,6 +10,7 @@ import {
   takeUntil,
   tap,
 } from 'rxjs';
+import { AuthenticationFacade } from 'src/app/auth/auth.facade';
 import { Project } from 'src/app/project/models/project';
 import { ProjectFacade } from 'src/app/project/project.facade';
 import { Ticket } from '../../models/ticket';
@@ -30,6 +31,7 @@ export class TicketViewComponent implements OnInit, OnDestroy {
   constructor(
     private ticketFacade: TicketFacade,
     private projectFacade: ProjectFacade,
+    public authFacade: AuthenticationFacade,
     private route: ActivatedRoute
   ) {}
 
