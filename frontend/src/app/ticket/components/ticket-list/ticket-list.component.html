@@ -1,5 +1,8 @@
 <div class="-mx-4 overflow-x-auto px-4 py-4 sm:-mx-8 sm:px-8">
-  <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
+  <div
+    class="inline-block min-w-full overflow-hidden rounded-lg shadow"
+    *ngIf="tickets.length; else noData"
+  >
     <table class="min-w-full leading-normal">
       <!-- Table Header -->
       <thead>
@@ -56,7 +59,7 @@
               ]"
             >
               <p class="text-base text-gray-900">{{ ticket.name }}</p>
-              <p class="text-gray-500 line-clamp-1">{{ ticket.description }}</p>
+              <p class="line-clamp-1 text-gray-500">{{ ticket.description }}</p>
             </a>
           </td>
           <td class="border-b border-gray-200 px-5 py-5 text-center text-sm">
@@ -82,8 +85,12 @@
             >
           </td>
           <td class="border-b border-gray-200 px-5 py-5 text-sm">
-            <p class="whitespace-nowrap text-gray-900">
-              {{ ticket.assignedTo?.name }}
+            <p
+              class="whitespace-nowrap text-gray-900 {{
+                ticket.assignedTo?.name ? '' : 'italic'
+              }}"
+            >
+              {{ ticket.assignedTo?.name ?? "None" }}
             </p>
           </td>
           <td class="border-b border-gray-200 px-5 py-5 text-sm">
@@ -96,3 +103,9 @@
     </table>
   </div>
 </div>
+
+<ng-template #noData>
+  <div class="mt-8 text-center text-2xl font-medium">
+    The project currently has no tickets. Try creating one.
+  </div>
+</ng-template>

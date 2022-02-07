@@ -22,7 +22,7 @@ export class AuthService {
     return this.http.post<TokenResponse>(this.apiUri + '/login', user);
   }
 
-  public secretRoute(): Observable<any> {
-    return this.http.get(this.apiUri + '/public-route');
+  public guestLogin(): Observable<TokenResponse> {
+    return this.http.post<TokenResponse>(this.apiUri + '/guestlogin', {});
   }
 }

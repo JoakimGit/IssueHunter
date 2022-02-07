@@ -8,6 +8,8 @@ import {
   Subject,
   takeUntil,
 } from 'rxjs';
+import { AuthenticationFacade } from 'src/app/auth/auth.facade';
+import { User } from 'src/app/auth/models/user';
 import { Project } from '../../models/project';
 import { ProjectFacade } from '../../project.facade';
 
@@ -18,13 +20,18 @@ import { ProjectFacade } from '../../project.facade';
 })
 export class ProjectViewComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
+  currentUser: User;
   projects$: Observable<Project[]>;
   filterInput = new FormControl();
   searchTerm = '';
 
-  constructor(private projectFacade: ProjectFacade) {}
+  constructor(
+    private projectFacade: ProjectFacade,
+    private authFacade: AuthenticationFacade
+  ) {}
 
   ngOnInit(): void {
+    this.currentUser = this.authFacade.getUserDetails() ?? ({} as User);
     this.projects$ = this.projectFacade.loadProjects();
     this.filterInput.valueChanges
       .pipe(debounceTime(200), distinctUntilChanged(), takeUntil(this.destroy$))

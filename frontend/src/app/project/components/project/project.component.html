@@ -2,7 +2,7 @@
   <div class="my-4 w-72 rounded-2xl bg-white p-4 px-4 pb-2 shadow-xl">
     <!-- Title -->
     <div class="flex justify-between">
-      <p class="mb-2 text-xl font-medium line-clamp-1">{{ project.name }}</p>
+      <p class="line-clamp-1 mb-2 text-xl font-medium">{{ project.name }}</p>
       <a class="ml-2 h-fit" [routerLink]="['.', project._id]" title="Edit">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -70,6 +70,7 @@
       <a
         [routerLink]="['/projects', project._id, 'invite']"
         class="mt-auto mb-2"
+        *ngIf="user.role === 'Admin' || user.role === 'Manager'"
       >
         <div title="Add Member" class="cursor-pointer">
           <svg

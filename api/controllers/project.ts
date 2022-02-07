@@ -2,10 +2,22 @@ import { Request, Response } from "express";
 import Project from "../models/project";
 
 const getProjects = async (req: Request, res: Response) => {
+  const userRole = req.payload.role;
+
   try {
-    const projects = await Project.find({
-      company: req.payload.company
-    }).populate("members");
+    let projects;
+
+    if (userRole === "Admin") {
+      projects = await Project.find({
+        company: req.payload.company
+      }).populate("members");
+    } else {
+      projects = await Project.find({
+        company: req.payload.company,
+        members: req.payload._id
+      }).populate("members");
+    }
+
     res.status(200).json({ projects });
   } catch (error) {
     console.error(error);

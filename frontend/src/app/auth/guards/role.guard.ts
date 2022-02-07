@@ -12,7 +12,7 @@ import { AuthenticationFacade } from '../auth.facade';
 @Injectable({
   providedIn: 'root',
 })
-export class AdminGuard implements CanActivate {
+export class RoleGuard implements CanActivate {
   constructor(private auth: AuthenticationFacade, private router: Router) {}
 
   canActivate(
@@ -25,7 +25,7 @@ export class AdminGuard implements CanActivate {
     | UrlTree {
     const user = this.auth.getUserDetails();
     if (!user) return false;
-    if (route.data['roles'] && route.data['roles'].indexOf(user.role) === -1) {
+    if (route.data['roles'].indexOf(user.role) === -1) {
       this.router.navigate(['/']);
       return false;
     }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminGuard } from '../auth/guards/admin.guard';
+import { RoleGuard } from '../auth/guards/role.guard';
 import { Role } from '../shared/enums/role';
 import { UserInviteComponent } from './components/user-invite/user-invite.component';
 
@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     component: UserInviteComponent,
-    canActivate: [AdminGuard],
+    canActivate: [RoleGuard],
     data: { roles: [Role.ADMIN] },
   },
 ];
