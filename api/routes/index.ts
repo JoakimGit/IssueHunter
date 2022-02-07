@@ -10,7 +10,7 @@ import * as ticketController from "../controllers/ticket";
 import * as userController from "../controllers/user";
 
 const auth = jwt({
-  secret: process.env.JWT_Secret as string,
+  secret: process.env.JWT_SECRET as string,
   userProperty: "payload",
   algorithms: ["sha1", "RS256", "HS256"]
 });
@@ -24,18 +24,10 @@ router.get("/projects", auth, projectController.getProjects);
 router.get("/projects/:id", auth, projectController.getProjectById);
 router.post("/projects", auth, projectController.createProject);
 router.put("/projects/:id", auth, projectController.updateProject);
-router.patch(
-  "/projects/:id/add-user",
-  auth,
-  projectController.addMemberToProject
-);
+router.patch("/projects/:id/add-user", auth, projectController.addMemberToProject);
 
 // TICKET ROUTES
-router.get(
-  "/projects/:id/tickets",
-  auth,
-  ticketController.getTicketsByProjectId
-);
+router.get("/projects/:id/tickets", auth, ticketController.getTicketsByProjectId);
 router.get("/tickets", auth, ticketController.getTickets);
 router.get("/tickets/:id", auth, ticketController.getTicketById);
 router.post("/tickets", auth, ticketController.createTicket);
