@@ -1,5 +1,5 @@
 require("dotenv").config();
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 const app = express();
 import passport from "passport";
 import routesApi from "./api/routes";
@@ -19,10 +19,6 @@ app.use("/api", routesApi);
 app.use(unauthorizedHandler);
 
 const PORT = process.env.PORT || 8080;
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("It works");
-});
 
 app
   .listen(PORT, () => {
