@@ -38,9 +38,7 @@ export class MyTicketsComponent implements OnInit {
     const userId = this.authFacade.getUserDetails()?._id;
 
     if (userId) {
-      this.tickets$ = this.ticketFacade
-        .getTicketsByUserId(userId)
-        .pipe(tap((resp) => console.log('RESP', resp)));
+      this.tickets$ = this.ticketFacade.getTicketsByUserId(userId);
     }
 
     this.filterInput.valueChanges

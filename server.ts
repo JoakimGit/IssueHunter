@@ -13,7 +13,6 @@ require("./api/config/passport");
 connectDB();
 
 const frontendDist = path.join(__dirname, "..", "frontend", "dist");
-console.log(frontendDist);
 app.use(express.static(frontendDist));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

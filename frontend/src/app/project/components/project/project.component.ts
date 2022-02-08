@@ -15,7 +15,5 @@ export class ProjectComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log('USER:', this.user);
-  }
+  ngOnInit(): void {}
 }

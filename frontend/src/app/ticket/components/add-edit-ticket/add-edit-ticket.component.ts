@@ -49,8 +49,6 @@ export class AddEditTicketComponent implements OnInit {
     } else {
       this.ticketFacade.getTicketById(id).subscribe((resp) => {
         this.selectedTicket = resp;
-        console.log(resp);
-
         this.setTicketFormGroup();
       });
     }
@@ -87,8 +85,6 @@ export class AddEditTicketComponent implements OnInit {
     };
 
     if (this.isAddMode) {
-      console.log(this.selectedTicket);
-
       this.ticketFacade.createTicket(this.selectedTicket);
     } else {
       this.ticketFacade.updateTicket(this.selectedTicket);
@@ -104,8 +100,6 @@ export class AddEditTicketComponent implements OnInit {
     this.ticketFacade
       .addCommentToTicket(content, this.selectedTicket._id)
       .subscribe((data: any) => {
-        console.log(data);
-
         this.selectedTicket.comments.push(data.comment);
       });
 
