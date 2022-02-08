@@ -5,15 +5,16 @@ import passport from "passport";
 import routesApi from "./api/routes";
 import connectDB from "./api/config/database.config";
 import cors from "cors";
+import path from "path";
 import { unauthorizedHandler } from "./api/middleware/unauthorizedHandler";
 require("./api/models/user");
 require("./api/config/passport");
 
 connectDB();
 
-console.log(__dirname + "/frontend/dist/");
-
-app.use(express.static("/frontend/dist/"));
+const frontendDist = path.join(__dirname, "..", "frontend", "dist");
+console.log(frontendDist);
+app.use(express.static(frontendDist));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
