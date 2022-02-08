@@ -7,7 +7,7 @@
     "dev": "ts-node-dev --files --respawn server.ts",
     "start": "node dist/server.js",
     "postinstall": "npx tsc",
-    "heroku-postbuild": "cd frontend && npm install && ng build"
+    "heroku-postbuild": "cd frontend && npm install"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +34,7 @@
     "typescript": "^4.5.4"
   },
   "engines": {
-    "node": "16.13.2"
+    "node": "16.13.2",
+    "npm": "8.1.2"
   }
 }
