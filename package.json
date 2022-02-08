@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --files --respawn server.ts",
     "start": "node dist/server.js",
-    "build": "tsc",
-    "postinstall": "npm run build",
+    "postinstall": "npx tsc",
     "heroku-postbuild": "cd frontend && npm install && ng build"
   },
   "keywords": [],
