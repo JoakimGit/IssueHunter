@@ -11,6 +11,9 @@ require("./api/config/passport");
 
 connectDB();
 
+console.log(__dirname + "/frontend/dist/");
+
+app.use(express.static(__dirname + "/frontend/dist/"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
