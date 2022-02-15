@@ -13,7 +13,7 @@
 
 ### Screenshots
 
-![projects-view](./images/projects.JPG)
+![projects-view](./images/projects.jpg)
 ![create-new-ticket](./images/new-ticket.JPG)
 
 ### Links
