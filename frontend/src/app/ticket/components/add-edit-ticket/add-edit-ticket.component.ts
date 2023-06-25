@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { AuthenticationFacade } from 'src/app/auth/auth.facade';
 import { User } from 'src/app/auth/models/user';
 import { ProjectFacade } from 'src/app/project/project.facade';

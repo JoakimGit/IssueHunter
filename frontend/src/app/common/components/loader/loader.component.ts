@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { LoadingService } from '../../services/loading.service';
 
 @Component({
@@ -14,13 +14,18 @@ export class LoaderComponent implements OnInit, OnDestroy {
   constructor(private loadingService: LoadingService) {}
 
   ngOnInit(): void {
-    this.loaderSub = this.loadingService.loading$.subscribe((val: boolean) => {
+    /* this.loaderSub = this.loadingService.loading$.subscribe((val: boolean) => {
       if (val) {
         this.showLoader.push(val);
       } else {
         this.showLoader.pop();
       }
-    });
+    }); */
+    this.loaderSub = this.loadingService.loading$
+      .pipe(
+        tap((val) => (val ? this.showLoader.push(val) : this.showLoader.pop()))
+      )
+      .subscribe();
   }
 
   ngOnDestroy(): void {

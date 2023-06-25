@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { User } from '../auth/models/user';
 import { Role } from '../shared/enums/role';
 import { UserService } from './api/user.service';
@@ -29,12 +29,18 @@ export class UserFacade {
   }
 
   public addEmployeeToCompany(email: string, role: Role): void {
-    this.userService.getUserByEmail(email).subscribe((user) => {
-      this.userService.addEmployeeToCompany(user._id, role).subscribe(() => {
-        this.reloadComponent();
-        this.toastr.success('User added', 'Success');
-      });
-    });
+    this.userService
+      .getUserByEmail(email)
+      .pipe(
+        switchMap((user) =>
+          this.userService.addEmployeeToCompany(user._id, role)
+        ),
+        tap(() => {
+          this.reloadComponent();
+          this.toastr.success('User added', 'Success');
+        })
+      )
+      .subscribe();
   }
 
   public removeEmployeeFromCompany(userId: string): void {
